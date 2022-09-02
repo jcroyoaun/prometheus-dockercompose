@@ -2,6 +2,8 @@ version: '3.9'
 
 volumes:
     prometheus_data: {}
+    grafana_data: {}
+
 
 services:
   prometheus:
@@ -48,6 +50,21 @@ services:
     restart: always
     deploy:
       mode: global
+
+  grafana:
+    image: grafana/grafana:latest
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    env_file:
+      - config.monitoring
+    networks:
+      - prometheus-network
 
 networks:
   prometheus-network:

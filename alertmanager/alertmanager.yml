@@ -9,4 +9,4 @@ receivers:
     auth_username: 'jcroyoaun@gmail.com'
     auth_identity: 'jcroyoaun@gmail.com'
     smarthost: smtp.gmail.com:587
-    auth_password: ''
+    auth_password: 'fuhhtyajbwbbopmp'
