@@ -75,6 +75,16 @@ services:
     networks:
         - prometheus-network
 
+  python_inst_app:
+    build: python_app/.
+    ports:
+      - 8000:8000
+      - 8001:8001
+    restart: always
+    deploy:
+      mode: global
+    networks:
+        - prometheus-network
 
 networks:
   prometheus-network:
