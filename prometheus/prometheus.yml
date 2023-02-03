@@ -25,7 +25,10 @@ scrape_configs:
       - targets: ["localhost:9090"]
   - job_name: "grafana"
     static_configs:
-      - targets: ["localhost:3000"]
+      - targets: ["grafana:3000"]
+  - job_name: 'blackbox_exporter'
+    static_configs:
+    - targets: ['blackbox:9115'] 
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'Service Discovery Files'
     file_sd_configs:

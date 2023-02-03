@@ -2,7 +2,7 @@ version: '3.9'
 
 volumes:
     prometheus_data: {}
-    grafana_data: {}
+    #grafana_data: {}
 
 
 services:
@@ -51,7 +51,6 @@ services:
     deploy:
       mode: global
 
-<<<<<<< HEAD
   grafana:
     image: grafana/grafana:latest
     depends_on:
@@ -59,14 +58,13 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - grafana_data:/var/lib/grafana
       - ./grafana/dashboards:/var/lib/grafana/dashboards
       - ./grafana/provisioning:/etc/grafana/provisioning
     env_file:
       - config.monitoring
     networks:
       - prometheus-network
-=======
+
   cadvisor:
     build: .
     privileged: true
@@ -103,7 +101,16 @@ services:
       mode: global
     networks:
         - prometheus-network
->>>>>>> service-discovery
+  
+  blackbox:
+    image: prom/blackbox-exporter
+    ports:
+      - 9115:9115
+    restart: always
+    deploy:
+      mode: global
+    networks:
+        - prometheus-network
 
 networks:
   prometheus-network:
